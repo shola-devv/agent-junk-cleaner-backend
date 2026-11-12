@@ -35,7 +35,7 @@ const envSchema = z.object({
   REQUEST_BODY_LIMIT: z.string().regex(/^\d+(kb|mb)$/i, 'use a value like 64kb').default('64kb'),
   RATE_LIMIT_WINDOW_MS: z.coerce.number().int().min(1000).default(60000),
   RATE_LIMIT_MAX: z.coerce.number().int().min(1).default(20),
-  DAILY_RATE_LIMIT_MAX: z.coerce.number().int().min(1).default(250),
+  DAILY_RATE_LIMIT_MAX: z.coerce.number().int().min(1).default(1200),
   MONGODB_URI: z.preprocess(
     (value) => (typeof value === 'string' && value.trim() === '' ? undefined : value),
     z.string().trim().min(1).optional(),
