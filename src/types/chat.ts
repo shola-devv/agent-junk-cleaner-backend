@@ -10,10 +10,12 @@ export interface ToolCallProposal {
   id: string;
   name: string;
   arguments: Record<string, unknown>;
+  description?: string;
 }
 
 export interface ChatResponseData {
   conversationId: string;
   message: { role: 'assistant'; content: string };
   toolCalls: ToolCallProposal[];
+  provider?: string;
 }

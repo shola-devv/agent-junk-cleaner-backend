@@ -1,6 +1,6 @@
 import { randomUUID } from 'crypto';
 import { z } from 'zod';
-import type { ToolCallProposal, ToolRisk } from '../../types/chat';
+import type { ToolCallProposal } from '../../types/chat';
 import { logger } from '../../utils/logger';
 
 export interface ToolDefinition {
