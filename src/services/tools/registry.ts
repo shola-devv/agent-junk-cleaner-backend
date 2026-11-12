@@ -30,6 +30,18 @@ const definitions: ToolDefinition[] = [
     description: 'Calculate cache totals, including totals by application.',
     argsSchema: z.strictObject({}),
   },
+  {
+    name: 'delete_candidates',
+    description:
+      'Move files found by the latest scan to the Recycle Bin. The desktop app asks the user for confirmation before anything is deleted.',
+    argsSchema: z
+      .strictObject({
+        candidateIds: z.array(z.uuid()).min(1).max(1000),
+      })
+      .refine((args) => new Set(args.candidateIds).size === args.candidateIds.length, {
+        message: 'candidateIds must be unique.',
+      }),
+  },
 ];
 
 const byName = new Map(definitions.map((d) => [d.name, d]));
@@ -68,6 +80,7 @@ export function validateToolCalls(raw: RawToolCall[], requestId: string): ToolCa
       id: randomUUID(),
       name: def.name,
       arguments: parsed.data,
+      description: def.description,
     });
   }
   return accepted;

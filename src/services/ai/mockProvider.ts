@@ -26,6 +26,12 @@ export class MockProvider implements AiProvider {
         toolCalls: [{ name: 'scan_computer', arguments: {} }],
       };
     }
+    if (text.includes('delete') || text.includes('clean')) {
+      return {
+        text: 'I can move files to the Recycle Bin for you. Run a scan first so we can pick the exact files.',
+        toolCalls: [{ name: 'scan_computer', arguments: {} }],
+      };
+    }
     return {
       text: 'This is a temporary response from the mock AI provider. Try asking me to scan your system.',
       toolCalls: [],

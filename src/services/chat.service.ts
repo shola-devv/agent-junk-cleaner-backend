@@ -40,7 +40,7 @@ export async function handleChat(input: ChatRequest, requestId: string): Promise
   }
 
   const lastMessage = input.messages[input.messages.length - 1];
-  const mustScan = lastMessage?.role === 'user' && /\bscan(?:ning|s)?\b/i.test(lastMessage.content);
+  const mustScan = lastMessage?.role === 'user' && /\bscan(?:ning|ned|s)?\b/i.test(lastMessage.content);
   const toolCalls = validateToolCalls(
     mustScan ? [{ name: 'scan_computer', arguments: {} }] : output.toolCalls,
     requestId,
